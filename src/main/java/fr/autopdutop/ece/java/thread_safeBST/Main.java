@@ -24,7 +24,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package fr.autopdutop.ece.java.tread_safeBST;
+package fr.autopdutop.ece.java.thread_safeBST;
 
 import java.io.IOException;
 import java.io.PrintWriter;

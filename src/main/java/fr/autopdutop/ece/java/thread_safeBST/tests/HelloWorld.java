@@ -1,4 +1,4 @@
-package fr.autopdutop.ece.java.tread_safeBST;
+package fr.autopdutop.ece.java.thread_safeBST.tests;
 
 public class HelloWorld {
 	public static final void main(String[] args) throws InterruptedException {
