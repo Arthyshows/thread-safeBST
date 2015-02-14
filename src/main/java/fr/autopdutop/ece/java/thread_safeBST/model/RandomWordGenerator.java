@@ -4,9 +4,12 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-//2) Write a RandomWordGenerator class which implements Iterable. 
-// The constructor of this class takes an integer parameter corresponding to the number of words to randomly generate.
-
+/**
+ * @author Clément Aceituno 2) Write a RandomWordGenerator class which
+ *         implements Iterable. The constructor of this class takes an integer
+ *         parameter corresponding to the number of words to randomly generate.
+ *
+ */
 public class RandomWordGenerator implements Iterable<String> {
 	protected static final int MAX = 10;
 	protected static final int MIN = 2;
