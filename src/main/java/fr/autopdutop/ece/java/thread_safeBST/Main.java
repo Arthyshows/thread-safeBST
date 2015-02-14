@@ -28,18 +28,28 @@ package fr.autopdutop.ece.java.thread_safeBST;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import fr.autopdutop.ece.java.thread_safeBST.model.RandomGenerator;
 
 public class Main {
   
   public static final void main(String[] args) throws IOException {
     String name = "rbtree";
     BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
-    rbtree.add(11);
-    rbtree.add(15); 
-    rbtree.add(8);
-    rbtree.add(12);
-    rbtree.add(4);
-    rbtree.add(9);
+    
+    RandomGenerator gen = new RandomGenerator (500);
+    
+    for (int randInt : gen ) {
+    	System.out.println(randInt);
+    	rbtree.add(randInt);
+    }
+    
+    //rbtree.add(11);
+    //rbtree.add(15); 
+    //rbtree.add(8);
+    //rbtree.add(12);
+    //rbtree.add(4);
+    //rbtree.add(9);
+    
     PrintWriter writer = new PrintWriter(name + ".dot");
     writer.println(rbtree.toDOT(name));
     writer.close();
