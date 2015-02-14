@@ -24,7 +24,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package fr.autopdutop.ece.java.thread_safeBST;
+package fr.autopdutop.ece.java.bst;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,7 +35,7 @@ public class Main {
     String name = "rbtree";
     BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
     rbtree.add(10);
-    rbtree.add(15); 
+    rbtree.add(15);
     rbtree.add(8);
     rbtree.add(12);
     rbtree.add(4);
