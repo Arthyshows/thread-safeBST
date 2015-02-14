@@ -51,7 +51,9 @@ public class Main {
     }
 	
 	public static final void main(String[] args) throws IOException {
-
+		
+		launch(args);
+		
 		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
 
 		ExecutorService executor = Executors.newFixedThreadPool(10);
@@ -71,12 +73,12 @@ public class Main {
 		}
 		executor.shutdown();
 
-		String name = "rbtree";
+		/*String name = "rbtree";
 		PrintWriter writer = new PrintWriter(name + ".dot");
 		writer.println(rbtree.toDOT(name));
 		writer.close();
 		ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name
 				+ ".pdf", name + ".dot");
-		builder.start();
+		builder.start();*/
 	}
 }
