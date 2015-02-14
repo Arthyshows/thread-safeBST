@@ -2,8 +2,11 @@ package fr.autopdutop.ece.java.thread_safeBST.model;
 
 import java.util.Iterator;
 import java.util.Random;
+import java.util.stream.Collectors;
 
-public class RandomGenerator implements Iterable<Integer> {
+public class RandomGenerator implements Iterable<String> {
+	protected static final int MAX = 10;
+	protected static final int MIN = 2;
 	private final int bound ;
 	private final Random rand = new Random ();
 	
@@ -12,8 +15,8 @@ public class RandomGenerator implements Iterable<Integer> {
 	}
 	
 	@Override
-	public Iterator<Integer> iterator() {
-		return new Iterator < Integer >() {
+	public Iterator<String> iterator() {
+		return new Iterator < String >() {
 			
 			private int counter = 0;
 			@Override
@@ -22,12 +25,10 @@ public class RandomGenerator implements Iterable<Integer> {
 			}
 			
 			@Override
-			public Integer next () {
+			public String next () {
 			counter ++;
-			return rand . nextInt ();
+			return rand.ints( rand.nextInt ( MAX - MIN + 1) + MIN ).map ( i -> Math.abs ( i ) % 26 + 'a').mapToObj ( i -> new String ( Character.toChars ( i ))).collect ( Collectors.joining ());
 			}
-		};
+			};
 }
-	
-
 }

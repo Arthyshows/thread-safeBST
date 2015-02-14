@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 
 import fr.autopdutop.ece.java.thread_safeBST.BinarySearchTree;
 
-public class ThreadBinaryTree implements Callable<> {
+public class ThreadBinaryTree implements Callable<Boolean> {
 	
 	private BinarySearchTree<E> rbtree;
 	private E e;	
@@ -23,6 +23,13 @@ public class ThreadBinaryTree implements Callable<> {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public ThreadBinaryTree call() throws Exception {
+		// TODO Auto-generated method stub
+		rbtree.add(e);
+		return null;
 	}
 
 }

@@ -5,18 +5,23 @@ import java.io.PrintWriter;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import fr.autopdutop.ece.java.thread_safeBST.BinarySearchTree;
-import fr.autopdutop.ece.java.thread_safeBST.model.ThreadBinaryTree;
+import fr.autopdutop.ece.java.thread_safeBST.model.*;
 
 public class Main {
 	public static final void main(String[] args) throws IOException {
 		String name = "rbtree";
-		BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
+		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
 		
 		ExecutorService executorService = Executors.newFixedThreadPool(10);
 		
+		RandomGenerator gen = new RandomGenerator (10);
+	    
+	    for (String randWord : gen ) {
+	    	System.out.println(randWord);
+	    	rbtree.add(randWord);
+	    }
 		
-		int[] table = new int[6];
+		/*int[] table = new int[6];
 		table[0]=10;
 		table[1]=15;
 		table[2]=8;
@@ -30,7 +35,7 @@ public class Main {
 			//new Thread(new ThreadBinaryTree<Integer>(rbtree, table[i]));
 		}
 		
-		executorService.shutdown();
+		executorService.shutdown();*/
 		
 		/*
 		rbtree.add(10);
