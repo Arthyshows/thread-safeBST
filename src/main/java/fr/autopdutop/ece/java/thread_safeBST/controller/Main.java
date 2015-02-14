@@ -12,10 +12,17 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import fr.autopdutop.ece.java.thread_safeBST.model.*;
 
 /*
@@ -34,21 +41,39 @@ import fr.autopdutop.ece.java.thread_safeBST.model.*;
  *         BSTAdder for each randomly generated word.
  *
  */
-public class Main {
+public class Main extends Application{
 	
 	private Stage primaryStage;
+	private AnchorPane rootLayout;
 
 	public void start(Stage primaryStage) {
         try {
-            StackPane page = (StackPane) FXMLLoader.load(Main.class.getResource("view.fxml"));
-            Scene scene = new Scene(page);
-            primaryStage.setScene(scene);
+        	this.primaryStage = primaryStage;
             primaryStage.setTitle("Java Advanced");
-            primaryStage.show();
+            primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+ 		       @Override
+ 		       public void handle(WindowEvent e) {
+ 		          Platform.exit();
+ 		          System.exit(0);
+ 		       }
+ 		    });
+            showView();
+            Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+            
         } catch (Exception e) {
         	e.printStackTrace();
         }
     }
+	
+	private void showView() throws IOException {
+		// Load person overview.
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(Main.class.getResource("/fxml/view.fxml"));
+		rootLayout = (AnchorPane) loader.load();
+		ViewController controllerAssignment = loader.getController();
+	}
 	
 	public static final void main(String[] args) throws IOException {
 		
@@ -56,7 +81,7 @@ public class Main {
 		
 		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
 
-		ExecutorService executor = Executors.newFixedThreadPool(10);
+		/*ExecutorService executor = Executors.newFixedThreadPool(10);
 		List<Future<Duration>> list = new ArrayList<Future<Duration>>();
 		Callable<Duration> callable = new BSTAdder(50, rbtree);
 
@@ -72,7 +97,7 @@ public class Main {
 			}
 		}
 		executor.shutdown();
-
+		*/
 		/*String name = "rbtree";
 		PrintWriter writer = new PrintWriter(name + ".dot");
 		writer.println(rbtree.toDOT(name));
