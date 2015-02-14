@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<TitledPane text="Multi-Threaded BST Benchmark" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<TitledPane text="Multi-Threaded BST Benchmark" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewController">
    <content>
       <SplitPane dividerPositions="0.186" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="500.0" prefWidth="500.0">
         <items>
@@ -27,12 +26,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ProgressBar prefWidth="200.0" progress="0.0" GridPane.columnIndex="2">
+                        <ProgressBar id="pgBar" fx:id="pgBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets left="35.0" />
                            </GridPane.margin>
                         </ProgressBar>
-                        <Button mnemonicParsing="false" text="Launch" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button id="launchBtn" fx:id="launchBtn" mnemonicParsing="false" text="Launch" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="100.0" />
                            </GridPane.margin>
@@ -53,15 +52,15 @@
                               <Font name="Arial" size="13.0" />
                            </font>
                         </Label>
-                        <TextField alignment="CENTER" text="0" GridPane.columnIndex="1" />
-                        <TextField alignment="CENTER" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField id="nbVal" fx:id="nbVal" alignment="CENTER" text="0" GridPane.columnIndex="1" />
+                        <TextField id="nbThreads" fx:id="nbThreads" alignment="CENTER" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <LineChart layoutX="24.0" layoutY="-86.0" prefHeight="365.0" prefWidth="498.0" title="Addition time / Number of threads" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <LineChart id="chartGraph" fx:id="chartGraph" layoutX="24.0" layoutY="-86.0" prefHeight="365.0" prefWidth="498.0" title="Addition time / Number of threads" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
                       <CategoryAxis side="BOTTOM" />
                     </xAxis>
