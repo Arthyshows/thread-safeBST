@@ -35,7 +35,8 @@ import java.util.ArrayDeque;
  *
  */
 public class BinarySearchTree<E extends Comparable<E>> {
-  
+  //4) Implement the synchronization mechanisms in the BinarySearchTree (see Lesson 3) to ensure the consistency of the tree during adding. (A voir pour un plus petit sync)
+
   private BinarySearchNode<E> root;
   
   /**
