@@ -34,7 +34,7 @@ public class Main {
   public static final void main(String[] args) throws IOException {
     String name = "rbtree";
     BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
-    rbtree.add(10);
+    rbtree.add(11);
     rbtree.add(15); 
     rbtree.add(8);
     rbtree.add(12);
