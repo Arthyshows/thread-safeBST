@@ -47,13 +47,6 @@ public class ViewController {
 	
 	 @FXML
 	protected void initialize() {
-		// Initialize the line chart points and displays
-		/*series1.getData().add(new XYChart.Data<Number, Number>(0.0, 1.0));
-		series1.getData().add(new XYChart.Data<Number, Number>(1.2, 1.4));
-		series1.getData().add(new XYChart.Data<Number, Number>(2.2, 1.9));
-		series1.getData().add(new XYChart.Data<Number, Number>(2.7, 2.3));
-		series1.getData().add(new XYChart.Data<Number, Number>(2.9, 0.5));*/
-		
 		lineChartData.add(series1);
 		chartGraph.setData(lineChartData);
 		chartGraph.createSymbolsProperty();
@@ -66,9 +59,7 @@ public class ViewController {
 		int nbThread = Integer.parseInt(this.nbThreads.getText());
 		int nbWord = Integer.parseInt(this.nbVal.getText());
 		// Print on output the values of text fields
-		System.out.println(nbWord+' '+nbThread);
-		// Use the text fields values to set the next point on line chart
-		series1.getData().add(new XYChart.Data<Number, Number>(nbThread, nbWord));		
+		System.out.println(nbWord+' '+nbThread);		
 		// Launch Benchmark
 		for(i=1;i<=nbThread;i++)
 		{
@@ -79,7 +70,7 @@ public class ViewController {
 	
 	public static void launch(int nbThread, int nbWord) {
 		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
-
+		int avg= 0;
 		ExecutorService executor = Executors.newFixedThreadPool(nbThread);
 		List<Future<Duration>> list = new ArrayList<Future<Duration>>();
 		Callable<Duration> callable = new BSTAdder(nbWord, rbtree);
@@ -90,14 +81,20 @@ public class ViewController {
 		}
 		for (Future<Duration> fut : list) {
 			try {
+				avg += fut.get().toNanos();
 				System.out.println(new Date() + "::" + fut.get().toNanos());
-				series1.getData().add(new XYChart.Data<Number, Number>(fut.get().toNanos(),nbThread));
 				
 			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
 		}
+		
+		avg = avg/nbThread;
+		series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
+		
 		executor.shutdown();
+		avg = avg/nbThread;
+		series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
 		String name = "rbtree";
 		PrintWriter writer;
 		try {

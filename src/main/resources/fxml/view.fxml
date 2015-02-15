@@ -63,10 +63,10 @@
                <children>
                   <LineChart id="chartGraph" fx:id="chartGraph" layoutX="24.0" layoutY="-86.0" prefHeight="365.0" prefWidth="498.0" title="Addition time / Number of threads" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
-                      <NumberAxis label="addition time" side="BOTTOM" />
+                      <NumberAxis label="Number of threads" side="BOTTOM" tickLabelGap="1.0" upperBound="20.0" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis label="Number of thread" side="LEFT" />
+                      <NumberAxis label="Time" side="LEFT" />
                     </yAxis>
                   </LineChart>
                </children>
