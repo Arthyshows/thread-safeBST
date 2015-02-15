@@ -57,8 +57,10 @@ public class ViewController {
 	 }
 
 	public void handleButtonLaunch(){
-		int i;
 		pgBar.setProgress(0);
+		lineChartData.remove(series1);
+		series1 = new LineChart.Series<Number, Number>();
+		lineChartData.add(series1);
 		// Get the value of text fields and convert strings to integer
 		int nbThread = Integer.parseInt(this.nbThreads.getText());
 		int nbWord = Integer.parseInt(this.nbVal.getText());
@@ -76,7 +78,6 @@ public class ViewController {
 						for(int i=1;i<=nbThread;i++)
 						{
 							double avg = Benchmark.launch(i,nbWord);
-							System.out.println(avg);
 							series1.getData().add(new XYChart.Data<Number, Number>(i,avg));
 							pgBar.setProgress(((double)i/(double)nbThread)*100);
 						}
