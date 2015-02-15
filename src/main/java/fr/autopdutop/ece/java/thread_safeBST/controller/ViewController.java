@@ -1,20 +1,13 @@
 package fr.autopdutop.ece.java.thread_safeBST.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 public class ViewController {
@@ -27,51 +20,37 @@ public class ViewController {
 	private TextField nbThreads;
 	@FXML 
 	private TextField nbVal;
+	@FXML 
+	private LineChart<Number, Number> chartGraph;
+	ObservableList<XYChart.Series<Number, Number>> lineChartData = FXCollections.observableArrayList();
+    LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
 	
 	public ViewController() {
 	}
 	
-	/*
-	public void start(Stage stage) {
-        stage.setTitle("Line Chart Sample");
-        //defining the axes
-        final NumberAxis xAxis = new NumberAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        xAxis.setLabel("Number of Month");
-        //creating the chart
-        final LineChart<Number,Number> lineChart = 
-                new LineChart<Number,Number>(xAxis,yAxis);
-
-        lineChart.setTitle("Stock Monitoring, 2010");
-        //defining a series
-        XYChart.Series series = new XYChart.Series();
-        series.setName("My portfolio");
-        //populating the series with data
-        series.getData().add(new XYChart.Data(1, 23));
-        series.getData().add(new XYChart.Data(2, 14));
-        series.getData().add(new XYChart.Data(3, 15));
-        series.getData().add(new XYChart.Data(4, 24));
-        series.getData().add(new XYChart.Data(5, 34));
-        series.getData().add(new XYChart.Data(6, 36));
-        series.getData().add(new XYChart.Data(7, 22));
-        series.getData().add(new XYChart.Data(8, 45));
-        series.getData().add(new XYChart.Data(9, 43));
-        series.getData().add(new XYChart.Data(10, 17));
-        series.getData().add(new XYChart.Data(11, 29));
-        series.getData().add(new XYChart.Data(12, 25));
-        
-        Scene scene  = new Scene(lineChart,800,600);
-        lineChart.getData().add(series);
-       
-        stage.setScene(scene);
-        stage.show();
-    }
-	*/
-	
-	public void handleButtonLaunch(){
-		String nmbThreads = nbThreads.getText();
-		String nmbVal = nbVal.getText();
+	 @FXML
+	protected void initialize() {
+		// Initialize the line chart points and displays
+		series1.getData().add(new XYChart.Data<Number, Number>(0.0, 1.0));
+		series1.getData().add(new XYChart.Data<Number, Number>(1.2, 1.4));
+		series1.getData().add(new XYChart.Data<Number, Number>(2.2, 1.9));
+		series1.getData().add(new XYChart.Data<Number, Number>(2.7, 2.3));
+		series1.getData().add(new XYChart.Data<Number, Number>(2.9, 0.5));
 		
-		System.out.println(nmbVal+nmbThreads);
+		lineChartData.add(series1);
+		chartGraph.setData(lineChartData);
+		chartGraph.createSymbolsProperty();
+	 }
+
+	public void handleButtonLaunch(){
+		// Get the value of text fields and convert strings to integer
+		int nbThread = Integer.parseInt(this.nbThreads.getText());
+		int nbWord = Integer.parseInt(this.nbVal.getText());
+		// Print on output the values of text fields
+		System.out.println(nbWord+' '+nbThread);
+		// Use the text fields values to set the next point on line chart
+		series1.getData().add(new XYChart.Data<Number, Number>(nbThread, nbWord));		
+		// Launch Benchmark
+		Benchmark.launch(nbThread, nbWord);
 	}
 }

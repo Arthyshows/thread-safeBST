@@ -62,7 +62,7 @@
                <children>
                   <LineChart id="chartGraph" fx:id="chartGraph" layoutX="24.0" layoutY="-86.0" prefHeight="365.0" prefWidth="498.0" title="Addition time / Number of threads" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
-                      <CategoryAxis side="BOTTOM" />
+                      <NumberAxis side="BOTTOM" />
                     </xAxis>
                     <yAxis>
                       <NumberAxis side="LEFT" />
