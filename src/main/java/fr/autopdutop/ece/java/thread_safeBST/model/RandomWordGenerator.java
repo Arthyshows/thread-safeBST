@@ -14,20 +14,21 @@ public class RandomWordGenerator implements Iterable<String> {
 	protected static final int MAX = 10;
 	protected static final int MIN = 2;
 	private final int bound;
+	private int counter;
 	private final Random rand = new Random();
-
 	public RandomWordGenerator(int bound) {
 		this.bound = bound;
+		this.counter = 0;
 	}
 
 	@Override
 	public Iterator<String> iterator() {
+		
 		return new Iterator<String>() {
-
-			private int counter = 0;
-
+			
 			@Override
 			public boolean hasNext() {
+				System.out.println(counter);
 				return counter < bound ? true : false;
 			}
 
