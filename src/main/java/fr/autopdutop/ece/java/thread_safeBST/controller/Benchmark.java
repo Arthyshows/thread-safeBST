@@ -32,6 +32,7 @@ public class Benchmark {
 		for (Future<Duration> fut : list) {
 			try {
 				System.out.println(new Date() + "::" + fut.get());
+				
 			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
