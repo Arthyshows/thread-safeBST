@@ -9,29 +9,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.autopdutop.ece.java.thread_safeBST.controller.ViewController">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.autopdutop.ece.java.thread_safeBST.controller.ViewController">
    <children>
-      <SplitPane dividerPositions="0.186" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="500.0" prefWidth="500.0">
+      <SplitPane dividerPositions="0.186" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="500.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <GridPane prefHeight="126.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="198.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="46.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="253.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="10.0" prefWidth="253.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.0" minWidth="10.0" prefWidth="84.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="443.0" minWidth="10.0" prefWidth="361.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ProgressBar id="pgBar" fx:id="pgBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="2">
+                        <ProgressBar id="pgBar" fx:id="pgBar" prefWidth="200.0" progress="0.0" GridPane.columnIndex="3">
                            <GridPane.margin>
                               <Insets left="35.0" />
                            </GridPane.margin>
                         </ProgressBar>
-                        <Button id="launchBtn" fx:id="launchBtn" onAction="#handleButtonLaunch" mnemonicParsing="false" text="Launch" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                        <Button id="launchBtn" fx:id="launchBtn" mnemonicParsing="false" onAction="#handleButtonLaunch" text="Launch" GridPane.columnIndex="3" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="100.0" />
                            </GridPane.margin>
@@ -62,10 +63,10 @@
                <children>
                   <LineChart id="chartGraph" fx:id="chartGraph" layoutX="24.0" layoutY="-86.0" prefHeight="365.0" prefWidth="498.0" title="Addition time / Number of threads" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <xAxis>
-                      <NumberAxis side="BOTTOM" />
+                      <NumberAxis label="addition time" side="BOTTOM" />
                     </xAxis>
                     <yAxis>
-                      <NumberAxis side="LEFT" />
+                      <NumberAxis label="Number of thread" side="LEFT" />
                     </yAxis>
                   </LineChart>
                </children>

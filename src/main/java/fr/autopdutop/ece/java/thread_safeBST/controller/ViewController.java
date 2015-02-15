@@ -1,5 +1,8 @@
 package fr.autopdutop.ece.java.thread_safeBST.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,7 +40,7 @@ public class ViewController {
 	@FXML 
 	private LineChart<Number, Number> chartGraph;
 	ObservableList<XYChart.Series<Number, Number>> lineChartData = FXCollections.observableArrayList();
-    LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
+    static LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
 	
 	public ViewController() {
 	}
@@ -54,6 +57,7 @@ public class ViewController {
 		lineChartData.add(series1);
 		chartGraph.setData(lineChartData);
 		chartGraph.createSymbolsProperty();
+		chartGraph.setLegendVisible(true);
 	 }
 
 	public void handleButtonLaunch(){
@@ -86,14 +90,27 @@ public class ViewController {
 		}
 		for (Future<Duration> fut : list) {
 			try {
-				System.out.println(new Date() + "::" + fut.get());
-				//series1.getData().add(new XYChart.Data<Number, Number>(nbThread, future));
+				System.out.println(new Date() + "::" + fut.get().toNanos());
+				series1.getData().add(new XYChart.Data<Number, Number>(fut.get().toNanos(),nbThread));
 				
 			} catch (InterruptedException | ExecutionException e) {
 				e.printStackTrace();
 			}
 		}
-		executor.shutdown();		
+		executor.shutdown();
+		String name = "rbtree";
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(name + ".dot");
+		
+	    writer.println(rbtree.toDOT(name));
+	    writer.close();
+	    ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name + ".pdf", name + ".dot");
+	    builder.start();
+	    } catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 
 }
