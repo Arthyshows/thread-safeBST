@@ -69,9 +69,13 @@ public class ViewController {
 	*/
 	
 	public void handleButtonLaunch(){
-		String nmbThreads = nbThreads.getText();
-		String nmbVal = nbVal.getText();
+		//String nmbThreads = nbThreads.getText();
+		//String nmbVal = nbVal.getText();
 		
-		System.out.println(nmbVal+nmbThreads);
+		int nbThread = Integer.parseInt(this.nbThreads.getText());
+		int nbWord = Integer.parseInt(this.nbVal.getText());
+		
+		System.out.println(nbWord+nbThread);
+		Benchmark.launch(nbThread, nbWord);
 	}
 }
