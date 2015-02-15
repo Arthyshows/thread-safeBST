@@ -1,8 +1,6 @@
 package fr.autopdutop.ece.java.thread_safeBST.model;
 
-import java.time.Instant;
 import java.util.concurrent.Callable;
-import java.time.Duration;
 
 /**
  * @author Arthur Mauvezin 3) Write a BSTAdder class which implements Callable
@@ -10,24 +8,23 @@ import java.time.Duration;
  *         binary search tree and measures the duration of the operation
  *         (System.nanoTime()).
  */
-public class BSTAdder implements Callable<Duration> {
+public class BSTAdder implements Callable<Long> {
 
 	private RandomWordGenerator gen;
 	private BinarySearchTree<String> rbtree;
 
 	@Override
-	public Duration call() throws Exception {
-		Instant t1 = Instant.now();
+	public Long call() throws Exception {
 
 		if (this.gen.iterator().hasNext()) {
-			// Add node
+			long startTime = System.nanoTime();
 			rbtree.add(this.gen.iterator().next());
+			long stopTime = System.nanoTime();
+			
+			return stopTime - startTime;
 		} else {
 			throw new Exception("No next word !!");
 		}
-
-		Instant t2 = Instant.now();
-		return Duration.between(t1, t2);
 	}
 
 	/**

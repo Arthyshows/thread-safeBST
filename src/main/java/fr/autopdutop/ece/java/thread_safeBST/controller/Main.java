@@ -1,17 +1,6 @@
 package fr.autopdutop.ece.java.thread_safeBST.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
@@ -20,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import fr.autopdutop.ece.java.thread_safeBST.model.*;
 
 /*
 OK	1) Implement a BinarySearchTree of String.
@@ -66,7 +54,6 @@ public class Main extends Application{
     }
 	
 	private void showView() throws IOException {
-		// Load person overview.
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(Main.class.getResource("/fxml/view.fxml"));
 		rootLayout = (AnchorPane) loader.load();
@@ -77,44 +64,5 @@ public class Main extends Application{
 		
 		launch(args);
 		
-/*
-		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
-
-		ExecutorService executor = Executors.newFixedThreadPool(10);
-		List<Future<Duration>> list = new ArrayList<Future<Duration>>();
-		Callable<Duration> callable = new BSTAdder(7, rbtree);
-
-		for (int i = 0; i < 7; i++) {
-			try {
-			Future<Duration> future = executor.submit(callable);
-			//list.add(future);
-			
-				System.out.println(future.get().getNano());
-			} catch (InterruptedException | ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		for (Future<Duration> fut : list) {
-			try {
-				System.out.println(new Date() + "::" + fut.get());
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		executor.shutdown();
-		*/
-		
-		/*
-		String name = "rbtree";
-		PrintWriter writer = new PrintWriter(name + ".dot");
-		writer.println(rbtree.toDOT(name));
-		writer.close();
-		ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name
-				+ ".pdf", name + ".dot");
-		builder.start();
-		*/
 	}
 }
