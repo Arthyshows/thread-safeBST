@@ -49,7 +49,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) {
         try {
         	this.primaryStage = primaryStage;
-            primaryStage.setTitle("Java Advanced");
+            primaryStage.setTitle("Multi-Threaded BST Benchmark");
             primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
  		       @Override
  		       public void handle(WindowEvent e) {
