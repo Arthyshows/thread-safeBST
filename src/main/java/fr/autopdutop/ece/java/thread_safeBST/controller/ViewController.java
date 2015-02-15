@@ -76,8 +76,8 @@ public class ViewController {
 						for(int i=1;i<=nbThread;i++)
 						{
 							double avg = Benchmark.launch(i,nbWord);
-							System.err.println();
-							series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
+							System.out.println(avg);
+							series1.getData().add(new XYChart.Data<Number, Number>(i,avg));
 							pgBar.setProgress(((double)i/(double)nbThread)*100);
 						}
 						return null;

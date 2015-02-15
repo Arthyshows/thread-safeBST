@@ -1,6 +1,7 @@
 package fr.autopdutop.ece.java.thread_safeBST.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,7 @@ import fr.autopdutop.ece.java.thread_safeBST.model.BinarySearchTree;
  */
 public class Benchmark {
 
-	public static double launch(int nbThread, int nbWord) throws IOException {
+	public static double launch(int nbThread, int nbWord) {
 		double sum = 0;
 
 		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
@@ -51,7 +52,19 @@ public class Benchmark {
 			}
 		}
 		executor.shutdown();
-
+		 try {
+		String name = "rbtree";
+		PrintWriter writer = new PrintWriter(name + ".dot");
+	    writer.println(rbtree.toDOT(name));
+	    writer.close();
+	    ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name + ".pdf", name + ".dot");
+	   
+			builder.start();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return sum / nbThread;
 	}
 }
