@@ -17,6 +17,8 @@ import fr.autopdutop.ece.java.thread_safeBST.model.BSTAdder;
 import fr.autopdutop.ece.java.thread_safeBST.model.BinarySearchTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
@@ -41,7 +43,8 @@ public class ViewController {
 	private LineChart<Number, Number> chartGraph;
 	ObservableList<XYChart.Series<Number, Number>> lineChartData = FXCollections.observableArrayList();
     static LineChart.Series<Number, Number> series1 = new LineChart.Series<Number, Number>();
-	
+    
+    
 	public ViewController() {
 	}
 	
@@ -55,59 +58,39 @@ public class ViewController {
 
 	public void handleButtonLaunch(){
 		int i;
+		pgBar.setProgress(0);
 		// Get the value of text fields and convert strings to integer
 		int nbThread = Integer.parseInt(this.nbThreads.getText());
 		int nbWord = Integer.parseInt(this.nbVal.getText());
 		// Print on output the values of text fields
 		System.out.println(nbWord+' '+nbThread);		
-		// Launch Benchmark
-		for(i=1;i<=nbThread;i++)
-		{
-			launch(nbThread, nbWord);
-		}
+		
+		final Service<Void> service = new Service<Void>() {
+
+			@Override
+			protected Task<Void> createTask() {
+				return new Task<Void>() {
+
+					@Override
+					protected Void call() throws Exception {
+						for(int i=1;i<=nbThread;i++)
+						{
+							double avg = Benchmark.launch(i,nbWord);
+							System.err.println();
+							series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
+							pgBar.setProgress(((double)i/(double)nbThread)*100);
+						}
+						return null;
+					}
+				};
+			}
+		};
+		service.start();
+		service.setOnSucceeded(workerStateEvent -> {
+			service.reset();
+		});
+		
 		
 	}
-	
-	public static void launch(int nbThread, int nbWord) {
-		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
-		int avg= 0;
-		ExecutorService executor = Executors.newFixedThreadPool(nbThread);
-		List<Future<Duration>> list = new ArrayList<Future<Duration>>();
-		Callable<Duration> callable = new BSTAdder(nbWord, rbtree);
-
-		for (int i = 0; i < nbWord; i++) {
-			Future<Duration> future = executor.submit(callable);
-			list.add(future);
-		}
-		for (Future<Duration> fut : list) {
-			try {
-				avg += fut.get().toNanos();
-				System.out.println(new Date() + "::" + fut.get().toNanos());
-				
-			} catch (InterruptedException | ExecutionException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		avg = avg/nbThread;
-		series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
-		
-		executor.shutdown();
-		avg = avg/nbThread;
-		series1.getData().add(new XYChart.Data<Number, Number>(nbThread,avg));
-		String name = "rbtree";
-		PrintWriter writer;
-		try {
-			writer = new PrintWriter(name + ".dot");
-		
-	    writer.println(rbtree.toDOT(name));
-	    writer.close();
-	    ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name + ".pdf", name + ".dot");
-	    builder.start();
-	    } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}	
 
 }
