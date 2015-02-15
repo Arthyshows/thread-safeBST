@@ -28,7 +28,7 @@ public class RandomWordGenerator implements Iterable<String> {
 			
 			@Override
 			public boolean hasNext() {
-				System.out.println(counter);
+				//System.out.println(counter);
 				return counter < bound ? true : false;
 			}
 
