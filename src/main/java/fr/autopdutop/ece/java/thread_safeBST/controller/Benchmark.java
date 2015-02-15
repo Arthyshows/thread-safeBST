@@ -1,5 +1,8 @@
 package fr.autopdutop.ece.java.thread_safeBST.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +18,7 @@ import fr.autopdutop.ece.java.thread_safeBST.model.BinarySearchTree;
 
 public class Benchmark {
 
-	public static void launch(int nbThread, int nbWord) {
+	public static void launch(int nbThread, int nbWord) throws IOException {
 		BinarySearchTree<String> rbtree = new BinarySearchTree<>();
 
 		ExecutorService executor = Executors.newFixedThreadPool(nbThread);
@@ -33,6 +36,13 @@ public class Benchmark {
 				e.printStackTrace();
 			}
 		}
-		executor.shutdown();		
+		executor.shutdown();
+		String name = "rbtree";
+		PrintWriter writer = new PrintWriter(name + ".dot");
+		writer.println(rbtree.toDOT(name));
+		writer.close();
+		ProcessBuilder builder = new ProcessBuilder("dot", "-Tpdf", "-o", name
+				+ ".pdf", name + ".dot");
+		builder.start();
 	}		
 }
