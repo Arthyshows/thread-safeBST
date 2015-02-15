@@ -155,5 +155,26 @@ public class BinarySearchTree<E extends Comparable<E>> {
 		}
 
 	}
-
+	
+	public boolean isValidBST(BinarySearchTree<String> BSTest) {
+		return validateBST(BSTest);
+	}
+ 
+	public boolean validateBST(BinarySearchTree<String> BSTest) {
+		if (BSTest == null) {
+			return true;
+		}
+		
+		BinarySearchTree<String> bstLeft = BSTest;
+		bstLeft.setRoot(BSTest.root.getLeftChild());
+		
+		BinarySearchTree<String> bstRight = BSTest;
+		bstRight.setRoot(BSTest.root.getRightChild());
+		
+		if (BSTest.root.key.compareTo(bstLeft.root.key) > 0 || BSTest.root.key.compareTo(bstRight.root.key) < 0) {
+			return false;
+		}
+		
+		return validateBST(bstLeft) && validateBST(bstRight);
+	}
 }
